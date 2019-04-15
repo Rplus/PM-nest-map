@@ -1,16 +1,15 @@
 import map from './map.js';
-
-
+import ctrls from './ctrls.js';
+import dialog from './dialog.js';
+import centerMark from './center-mark.js';
 import { urls } from './u/urls.js';
 import * as u from './u/u.js';
 
-const SpreadsheetId = '1N9aa3LZMaFwNbjUSGVD9NloBNE7sM0DY318-DtZHzVo';
+window.info = {
+  nowlatlng: {},
+  SpreadsheetId: '1N9aa3LZMaFwNbjUSGVD9NloBNE7sM0DY318-DtZHzVo',
+};
 
-var formData = new FormData();
-formData.append('id', SpreadsheetId);
-
-// u.fetchJSON(urls.GAS)
-// .then(d => {
-//   console.log(d, 123);
-// });
-
+document.body.appendChild(ctrls);
+document.body.appendChild(dialog);
+document.body.appendChild(centerMark);

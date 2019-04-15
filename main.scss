@@ -1,15 +1,15 @@
 body {
-  padding: 0;
   margin: 0;
 }
+
 html, body, #map {
   height: 100vh;
   width: 100vw;
 }
 
-// .leaflet-tile-pane {
-//   opacity: .3;
-// }
+.leaflet-tile-pane {
+  opacity: .4;
+}
 
 // .leaflet-tile-container.leaflet-zoom-animated {
 //   opacity: .7;

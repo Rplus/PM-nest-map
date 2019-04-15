@@ -8,6 +8,13 @@ export function fetchJSON(url) {
 };
 
 
+export function getPlanText(str) {
+  var text = document.createTextNode(str);
+  var p = document.createElement('p');
+  p.appendChild(text);
+  return p.innerHTML;
+}
+
 // export function myFetch(url, type = 'json') {
 //   return fetch(url).then(res => {
 //     switch (type) {

@@ -1,6 +1,7 @@
 /* global L */
 
 import getPosition from './u/get-position.js';
+import { getData } from './get-data.js';
 
 
 window.Leaflet = window.L;
@@ -17,7 +18,13 @@ map
   .on('locationerror', onLocationError)
   .setView(position.latLng, position.zoom)
 
-console.log(11);
+
+Leaflet.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+  }).addTo(map);
+
+
 
 function setPosition() {
   if (!map) { return; }
@@ -30,6 +37,8 @@ function setPosition() {
   localStorage.setItem('zoom', map.getZoom());
 };
 
+
+let markersInView = [];
 export function renderMarkersInView() {
   let bounds = map.getBounds();
 
@@ -55,7 +64,7 @@ export function renderMarkersInView() {
 
 
 function onLoad() {
-  // getData();
+  getData();
   setPosition();
 };
 
@@ -78,3 +87,8 @@ function onLocationError(e) {
 
 
 export default map;
+
+
+export function earseMarkers(markers) {
+  markers.forEach(m => map.removeLayer(m));
+}
