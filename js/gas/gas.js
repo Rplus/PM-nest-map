@@ -30,21 +30,7 @@ function getPmNames() {
   return names.map(function(s) { return s[0]; });
 }
 
-function doGet(e) {
-  var param = e.parameter;
-  var id = param.id;
-
-  if (param.debug) {
-    LL(id);
-  }
-
-  if (!checkId(id)) {
-    return returnJSON({
-      status: 'error',
-      errors: ['invalidate id']
-    });
-  }
-
+function getNewData() {
   var sheet = getSheetFromNamedInRC(1, 1);
   var lastRow = sheet.getLastRow();
   var lastColumn = sheet.getLastColumn();
@@ -69,6 +55,24 @@ function doGet(e) {
   });
   if (param.debug) { LL(JSON.stringify(resultObj)); }
   return returnJSON(resultObj);
+}
+
+function doGet(e) {
+  var param = e.parameter;
+  var id = param.id;
+
+  if (param.debug) {
+    LL(id);
+  }
+
+  if (!checkId(id)) {
+    return returnJSON({
+      status: 'error',
+      errors: ['invalidate id']
+    });
+  }
+
+  return getNewData();
 }
 
 function LL(s) {
