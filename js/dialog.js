@@ -96,16 +96,6 @@ _dialog.elm.form.addEventListener('submit', (e) => {
   console.log(111122);
   
   e.preventDefault();
-  let data = new FormData();
-  data.append('dex', _dialog.elm.dex.value);
-  data.append('lat', _dialog.elm.lat.value);
-  data.append('lng', _dialog.elm.lng.value);
-  data.append('scale', _dialog.elm.scale.value);
-  data.append('note', _dialog.elm.note.value);
-  data.append('type', _dialog.elm.type.value);
-  data.append('uid', 1);
-  data.append('timestamp', +new Date());
-  data.append('id', window.info.SpreadsheetId);
 
   let gg = new URLSearchParams({
     'dex': _dialog.elm.dex.value,
@@ -119,16 +109,11 @@ _dialog.elm.form.addEventListener('submit', (e) => {
     'id': window.info.SpreadsheetId,
   });
 
-  console.log(gg.toString());
-  let url ='https://script.google.com/macros/s/AKfycbwv0HHiEgWwxtdasGMxrBRf5zD3CP8Yip-2PPegoVhmdRMAu-9_/exec';
-  
-  fetch(`${urls.GAS}&${gg.toString()}`, {
+  fetch(urls.GAS, {
     method: 'POST',
     // mode: 'no-cors',
-    // body: data,
-    // // body: gg.toString(),
-    // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    headers: { 'Content-Type': 'multipart/form-data' },
+    body: gg.toString(),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   })
   .then(u.toJSON)
   .then(d => {
