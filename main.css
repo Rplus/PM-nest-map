@@ -52,6 +52,10 @@ html, body, #map {
   color: #666;
 }
 
+.note:empty {
+  display: none;
+}
+
 .popup-content--footer {
   font-size: smaller;
   display: flex;
