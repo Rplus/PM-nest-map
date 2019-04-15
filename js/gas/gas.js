@@ -37,6 +37,7 @@ function doGet(e) {
   if (param.debug) {
     LL(id);
   }
+
   if (!checkId(id)) {
     return returnJSON({
       status: 'error',
@@ -63,7 +64,7 @@ function doGet(e) {
       }
       return all;
     }, {});
-    dd.name = names[d[1] - 1];
+    dd.name = names[d[0] - 1];
     return dd;
   });
   if (param.debug) { LL(JSON.stringify(resultObj)); }
@@ -75,22 +76,11 @@ function LL(s) {
   console.log(s);
 }
 
-// function cc() {
-//   var sheet = getActiveSheet();
-//   var lastColumn = sheet.getLastColumn();
-//   var lastRow = sheet.getLastRow();
-
-//   LL(sheet.getFrozenRows());
-//   LL(lastColumn);
-//   var fRows = sheet.getFrozenRows();
-//   var fColumns = sheet.getFrozenColumns();
-//   var dataRC = [1 + fRows, 1 + fColumns];
-//   LL(sheet.getSheetValues(1 + fRows, 1 + fColumns, lastRow - fRows, lastColumn - fColumns));
-// }
-
 function doPost(e) {
   var param = e.parameter;
   var id = param.id;
+  LL('doPost');
+  LL(param);
   if (!checkId(id)) {
     return (
       ContentService.createTextOutput(
@@ -101,9 +91,9 @@ function doPost(e) {
       ).setMimeType(ContentService.MimeType.JSON)
     );
   }
-  var data = param.data;
+
   var sheet = getSheetFromNamedInRC(1, 1);
-  data = data.split(',');
+  var data = [param.dex, param.lat, param.lng, param.scale, param.note, param.type, param.uid, new Date().toISOString()];
   sheet.appendRow(data);
   var JSONString = JSON.stringify({
     status: 'ok',
@@ -115,39 +105,16 @@ function doPost(e) {
 function debugGet() {
   LL('debugGet');
   var x = doGet({parameter: { id: SpreadsheetId, debug: true, }});
-  // Logger.log('debugGet');
-  // var queryString = '?id=' + SpreadsheetId;
-  // var url = ScriptApp.getService().getUrl() + queryString;
-  // var options = {
-  //   'method': 'GET',
-  //   'followRedirects': true,
-  //   'muteHttpExceptions': true
-  // };
-  // var result = UrlFetchApp.fetch(url, options);
-  // if (result.getResponseCode() == 200) {
-  //   var params = JSON.parse(result.getContentText());
-  //   Logger.log(JSON.stringify(params));
-  // }
 }
 
 function debugPost() {
   LL('debugPost');
-  var x = doPost({parameter: { id: SpreadsheetId, debug: true, data: 'cc,as,,asd,asd,aa11'}});
-
-  // Logger.log('debugPost');
-  // var url = ScriptApp.getService().getUrl();
-  // var payload = {
-  //   id: '14q38yMwbrI0c9Mq6PrOB-oxndFmk3wg6_SjeMtXi6Qg'
-  // };
-  // var options = {
-  //   'method': 'POST',
-  //   'payload': payload,
-  //   'followRedirects': true,
-  //   'muteHttpExceptions': true
-  // };
-  // var result = UrlFetchApp.fetch(url, options);
-  // if (result.getResponseCode() == 200) {
-  //   var params = JSON.parse(result.getContentText());
-  //   Logger.log(params);
-  // }
+  var x = doPost({
+    parameter: {
+      id: SpreadsheetId,
+      debug: true,
+      'dex': 1, 'lat': 25.047516, 'lng': 121.563219, 'scale': 5, 'note': 'cc', 'type': 'new', 'uid': 1,
+    }
+  });
+  LL(x);
 }
