@@ -30,12 +30,59 @@ function getPmNames() {
   return names.map(function(s) { return s[0]; });
 }
 
-function getNewData() {
+function validateData(dataArr) {
+  var data = dataArr.filter(function(rowData) {
+    return (
+      !!rowData[0] &&
+      !!rowData[1] &&
+      !!rowData[2] &&
+      !!rowData[3] &&
+      (rowData[4] !== 'xxXxx') && // kill word
+      (rowData[8] !== 'gg') // admin kill word
+    );
+  });
+  return uniArr(data);
+}
+
+function uniArr(arr) {
+  var o = {};
+  arr.forEach(function(d) {
+    var key = d.slice(1, 3).join();
+    if (
+      !o[key] ||
+      ( o[key] && (d[5] === 'update') )
+    ) {
+      o[key] = d;
+    }
+  });
+
+  var x = [];
+  for (var i in o) {
+    if (o.hasOwnProperty(i)) {
+      x.push(o[i]);
+    }
+  }
+
+  return x;
+}
+
+function cc() {
   var sheet = getSheetFromNamedInRC(1, 1);
   var lastRow = sheet.getLastRow();
   var lastColumn = sheet.getLastColumn();
   var firstRowValues = sheet.getSheetValues(1, 1, 1, lastColumn)[0];
   var resultSheetArr = sheet.getSheetValues(2, 1, lastRow - 1, lastColumn);
+  LL(resultSheetArr);
+  LL(validateData(resultSheetArr));
+}
+
+function returnNewData() {
+  var sheet = getSheetFromNamedInRC(1, 1);
+  var lastRow = sheet.getLastRow();
+  var lastColumn = sheet.getLastColumn();
+  var firstRowValues = sheet.getSheetValues(1, 1, 1, lastColumn)[0];
+  var resultSheetArr = sheet.getSheetValues(2, 1, lastRow - 1, lastColumn);
+  resultSheetArr = validateData(resultSheetArr);
   var names = getPmNames();
   var resultObj = {
     status: 'ok',
@@ -53,9 +100,14 @@ function getNewData() {
     dd.name = names[d[0] - 1];
     return dd;
   });
-  if (param.debug) { LL(JSON.stringify(resultObj)); }
+  // LL(JSON.stringify(resultObj));
   return returnJSON(resultObj);
 }
+
+function returnPmNames() {
+  var names = getPmNames();
+  return returnJSON(names);
+};
 
 function doGet(e) {
   var param = e.parameter;
@@ -72,12 +124,18 @@ function doGet(e) {
     });
   }
 
-  return getNewData();
+  switch (param.method) {
+    case 'get_pm_name':
+      return returnPmNames();
+
+    default:
+      return returnNewData();
+  }
 }
 
 function LL(s) {
-  Logger.log(s);
-  console.log(s);
+  // Logger.log(s);
+  // console.log(s);
 }
 
 function doPost(e) {

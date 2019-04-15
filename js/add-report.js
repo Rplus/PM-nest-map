@@ -5,7 +5,7 @@ import dialog from './dialog.js';
 export function addReport(params) {
   let { lat, lng } = _map.getCenter();
 
-  let oParams = {
+  let defaultParams = {
     lat,
     lng,
     scale: 1,
@@ -13,14 +13,8 @@ export function addReport(params) {
     note: '',
   };
 
-  console.log({
-    ...oParams,
-    ...params,
-  });
-  
-  
   dialog.initReport({
-    ...oParams,
+    ...defaultParams,
     ...params,
   });
 };
@@ -29,7 +23,7 @@ document.body.addEventListener('click', (e) => {
   if (e.target.className === 'fix-reoprt') {
     let data = e.target.dataset;
     console.log(data);
-    
+
     addReport({
       lat: +data.lat,
       lng: +data.lng,
@@ -39,5 +33,4 @@ document.body.addEventListener('click', (e) => {
       note: data.note,
     });
   }
-  
 })

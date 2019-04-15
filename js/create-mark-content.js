@@ -8,9 +8,11 @@ export default function createMarkerContent(report) {
   // );
 
   return `
-    <div>
-      #${report.dex} ${report.name}: ~${report.scale}/hr
-      <div>${getPlanText(report.note || '')}</div>
+    <div class="popup-content">
+      #${report.dex} ${report.name}: ${report.scale}+/hr
+      <div class="note">${getPlanText(report.note || '')}</div>
+      <hr>
+      <div class="align-right">
       <a class="fix-reoprt" href="###"
         data-lat="${report.lat}"
         data-lng="${report.lng}"
@@ -19,8 +21,9 @@ export default function createMarkerContent(report) {
         data-note="${report.note || ''}"
         data-dex="${report.dex}"
       >
-        fix it!
+        修正更新
       </a>
+      </div>
     </div>
   `;
   // return `

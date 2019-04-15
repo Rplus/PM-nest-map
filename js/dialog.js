@@ -1,8 +1,11 @@
+import { postData } from './post-data.js';
+import { getData } from './get-data.js';
 import { urls } from './u/urls.js';
 import * as u from './u/u.js';
 
 let _dialog = document.createElement('dialog');
 _dialog.id = 'dialog';
+window._dialog = _dialog;
 
 _dialog.innerHTML = `
   <form id="report-form" class="report-form" action="${urls.GAS}">
@@ -56,12 +59,12 @@ _dialog.elm = {
   closeBtn: _dialog.querySelector('#close-dialog'),
   form: _dialog.querySelector('form'),
 };
-  
+
 _dialog.elm.closeBtn.addEventListener('click', _dialog.close.bind(_dialog))
 
 
 // init pm names
-u.fetchJSON('./pm-name.json')
+u.fetchJSON(`${urls.GAS}&method=get_pm_name`)
 .then(d => {
   _dialog.elm.pmList.innerHTML = d.map(
     (name, idx) => `<option value="${idx + 1}" label="${idx + 1} - ${name}"></option>`
@@ -69,7 +72,25 @@ u.fetchJSON('./pm-name.json')
 });
 
 
-window._dialog = _dialog;
+function validateForm(arg = {}) {
+  _dialog.elm.submit.disabled = arg.forceDisabled || !_dialog.elm.form.checkValidity();
+};
+
+function submitFn(e) {
+  e.preventDefault();
+  validateForm({ forceDisabled: true });
+
+  postData(_dialog)
+  .then(d => {
+    validateForm();
+    _dialog.close();
+    getData();
+  });
+};
+
+_dialog.elm.form.addEventListener('submit', submitFn);
+_dialog.elm.form.addEventListener('change', validateForm);
+
 _dialog.initReport = (param) => {
   if (_dialog.open) {
     return;
@@ -87,40 +108,6 @@ _dialog.initReport = (param) => {
   _dialog.showModal();
 };
 
-function validateForm(params) {
-  _dialog.elm.submit.disabled = !_dialog.elm.form.checkValidity();
-}
 
-_dialog.elm.form.addEventListener('change', validateForm);
-_dialog.elm.form.addEventListener('submit', (e) => {
-  console.log(111122);
-  
-  e.preventDefault();
-
-  let gg = new URLSearchParams({
-    'dex': _dialog.elm.dex.value,
-    'lat': _dialog.elm.lat.value,
-    'lng': _dialog.elm.lng.value,
-    'scale': _dialog.elm.scale.value,
-    'note': _dialog.elm.note.value,
-    'type': _dialog.elm.type.value,
-    'uid': 2,
-    'timestamp': +new Date(),
-    'id': window.info.SpreadsheetId,
-  });
-
-  fetch(urls.GAS, {
-    method: 'POST',
-    // mode: 'no-cors',
-    body: gg.toString(),
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  })
-  .then(u.toJSON)
-  .then(d => {
-    console.log(111122, d);
-    
-  })
-
-});
 
 export default _dialog;
