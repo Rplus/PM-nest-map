@@ -109,5 +109,4 @@ _dialog.initReport = (param) => {
 };
 
 
-
 export default _dialog;

@@ -26,11 +26,6 @@ let dom = scales.reduce((all, scale) => {
   return all;
 }, { input: [], label: [], style: [] });
 
-// let filter = document.querySelector(`.${filterBoxClass}`);
-// let style = document.createElement('style');
-// style.innerHTML = dom.style.join('');
-// filter.innerHTML = dom.label.join('');
-// filter.insertAdjacentElement('afterbegin', style);
 document.querySelector('#map').insertAdjacentHTML('beforebegin', dom.input.join(''));
 
 let filterIndicator = createIndicator({

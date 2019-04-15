@@ -13,18 +13,12 @@ export function getData() {
 
   Promise.all([
     u.fetchJSON(urls.GAS),
-    // u.fetchJSON('./fake.json'),
   ])
   .then(d => {
     let data = d[0].data;
     console.log(data);
-    // getIcons(data);
     window.markers = new Map();
     data.forEach(setMark);
-    // // updateReportTasks(d[2]);
-
-    // let reports = d[1];
-    // reports.forEach(setMark);
     renderMarkersInView();
   });
 }
