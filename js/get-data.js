@@ -7,16 +7,17 @@ import { renderMarkersInView } from './map.js';
 export function getData() {
   console.log('re-fetching~~~');
 
-  if (window.markers) {
-    earseMarkers(window.markers);
-  }
 
   Promise.all([
     u.fetchJSON(urls.GAS),
   ])
   .then(d => {
     let data = d[0].data;
-    console.log(data);
+
+    if (window.markers) {
+      earseMarkers(window.markers);
+    }
+
     window.markers = new Map();
     data.forEach(setMark);
     renderMarkersInView();
