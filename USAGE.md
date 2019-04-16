@@ -1,4 +1,6 @@
 
+地圖網址： <https://rplus.github.io/PM-nest-map/>
+
 網頁截圖：  
 ![](https://i.imgur.com/KqBbiJ3.png)
 
@@ -37,18 +39,19 @@
 
 ### 4) 新增/更新資料點
 
-![](https://i.imgur.com/arRhjbh.png)
-
 資料點位置將取中心十字的位置，  
 待填資料共三欄：
 
 * 編號：  
-  可輸入中文搜尋 & 點選，但最終需要填入的是編號數字  
-  非數字將會是無效資料
+  可輸入中文搜尋 & 點選，但最終需要填入的是編號**數字**  
+  非數字者將會是無效資料，請留意
 
-* 巢穴規模：下拉選單
-* 註解
+* 規模：下拉選單
+* 註解：選填，可填公園名稱、
 
 填完送出成功後，地圖將會關閉表單框並自動更新資料。
+
+![](https://i.imgur.com/arRhjbh.png)
+
 
 有任何建議可至 [issue](https://github.com/Rplus/PM-nest-map/issues) 提出。
