@@ -33,11 +33,10 @@ function getPmNames() {
 function validateData(dataArr) {
   var data = dataArr.filter(function(rowData) {
     return (
-      !!rowData[0] &&
+      !!rowData[0] && (rowData[0] < 500) &&
       !!rowData[1] &&
       !!rowData[2] &&
       !!rowData[3] &&
-      (rowData[4] !== 'xxXxx') && // kill word
       (rowData[8] !== 'gg') // admin kill word
     );
   });
@@ -54,6 +53,9 @@ function uniArr(arr) {
     ) {
       o[key] = d;
     }
+    if (d[4] === 'xxXxx') { // kill word
+      delete o[key];
+    }
   });
 
   var x = [];
@@ -64,6 +66,11 @@ function uniArr(arr) {
   }
 
   return x;
+}
+
+function tryFn() {
+  LL('gg')
+  LL('電極獸' < 500)
 }
 
 function cc() {
@@ -134,8 +141,8 @@ function doGet(e) {
 }
 
 function LL(s) {
-  // Logger.log(s);
-  // console.log(s);
+ Logger.log(s);
+ console.log(s);
 }
 
 function doPost(e) {
