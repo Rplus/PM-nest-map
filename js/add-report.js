@@ -6,6 +6,7 @@ export function addReport(params) {
   let { lat, lng } = _map.getCenter();
 
   let defaultParams = {
+    dex: 0.5,
     lat,
     lng,
     scale: 1,

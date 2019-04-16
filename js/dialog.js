@@ -102,8 +102,10 @@ _dialog.initReport = (param) => {
 
 export default _dialog;
 
+let returnOption = (value, label) => `<option value="${value}" label="${label}"></option>`;
+
 export function createNamesOption(names) {
   _dialog.elm.pmList.innerHTML = names.map(
-    (name, idx) => `<option value="${idx + 1}" label="${idx + 1} - ${name}"></option>`
-  ).join('');
+    (name, idx) => returnOption(idx + 1, name)
+  ).join('') + returnOption(0.5, '？');
 };
