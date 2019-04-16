@@ -63,15 +63,6 @@ _dialog.elm = {
 _dialog.elm.closeBtn.addEventListener('click', _dialog.close.bind(_dialog))
 
 
-// init pm names
-u.fetchJSON(`${urls.GAS}&method=get_pm_name`)
-.then(d => {
-  _dialog.elm.pmList.innerHTML = d.map(
-    (name, idx) => `<option value="${idx + 1}" label="${idx + 1} - ${name}"></option>`
-  ).join('');
-});
-
-
 function validateForm(arg = {}) {
   _dialog.elm.submit.disabled = arg.forceDisabled || !_dialog.elm.form.checkValidity();
 };
@@ -110,3 +101,9 @@ _dialog.initReport = (param) => {
 
 
 export default _dialog;
+
+export function createNamesOption(names) {
+  _dialog.elm.pmList.innerHTML = names.map(
+    (name, idx) => `<option value="${idx + 1}" label="${idx + 1} - ${name}"></option>`
+  ).join('');
+};
