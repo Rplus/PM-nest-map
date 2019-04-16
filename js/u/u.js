@@ -10,8 +10,14 @@ export function fetchJSON(url) {
 
 export function UID() {
   let uid = localStorage.getItem('uid');
-  if (!uid) {
-    uid = 'xx' + navigator.userAgent.replace(/\D/g, '') + (Math.random()).toFixed(8);
+  if (!uid || (uid.indexOf('-') === -1)) {
+    uid = (
+      navigator.userAgent
+        .replace(/\D/g, '')
+        .match(/(\d{6,11})/g)
+        .map(d => (+d).toString(36)).join('-') +
+        Math.random().toString(36)
+    );
     localStorage.setItem('uid', uid);
   }
   return uid;
