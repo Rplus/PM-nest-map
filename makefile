@@ -9,4 +9,4 @@ rollup_js:
 	rollup -c rollup.config.js
 
 browser-sync:
-	browser-sync start --server --no-open --no-notify --files="**/*"
+	browser-sync start --server --no-open --no-notify --files="**/*" --ignore="node_modules/*"
