@@ -20,7 +20,7 @@ export default function createMarkerContent(report) {
           data-note="${report.note || ''}"
           data-dex="${report.dex}"
         >
-          更新👊
+          修正拳👊
         </a>
         <a href="${googleNavigation}" target="_blank">Go↗️</a>
       </div>
