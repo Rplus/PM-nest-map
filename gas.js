@@ -90,7 +90,7 @@ function returnNewData() {
   var firstRowValues = sheet.getSheetValues(1, 1, 1, lastColumn)[0];
   var resultSheetArr = sheet.getSheetValues(2, 1, lastRow - 1, lastColumn);
   resultSheetArr = validateData(resultSheetArr);
-  var names = getPmNames();
+  // var names = getPmNames();
   var resultObj = {
     status: 'ok',
     data: []
@@ -104,7 +104,7 @@ function returnNewData() {
       }
       return all;
     }, {});
-    dd.name = names[d[0] - 1];
+    // dd.name = names[d[0] - 1];
     return dd;
   });
   // LL(JSON.stringify(resultObj));
