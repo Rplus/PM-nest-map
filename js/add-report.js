@@ -21,6 +21,7 @@ export function addReport(params) {
 
 document.body.addEventListener('click', (e) => {
   if (e.target.className === 'fix-reoprt') {
+    e.preventDefault();
     let data = e.target.dataset;
     console.log(data);
 
