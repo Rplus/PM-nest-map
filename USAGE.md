@@ -2,7 +2,7 @@
 地圖網址： <https://rplus.github.io/PM-nest-map/>
 
 網頁截圖：  
-![](https://i.imgur.com/KqBbiJ3.png)
+![](https://i.imgur.com/Zg4oMIJ.png)
 
 ### 1) 目前地圖上可看到的資訊有：
 
@@ -51,7 +51,6 @@
 
 填完送出成功後，地圖將會關閉表單框並自動更新資料。
 
-![](https://i.imgur.com/arRhjbh.png)
-
+![](https://i.imgur.com/NTrRdkE.png)
 
 有任何建議可至 [issue](https://github.com/Rplus/PM-nest-map/issues) 提出。
