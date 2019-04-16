@@ -8,6 +8,16 @@ export function fetchJSON(url) {
 };
 
 
+export function UID() {
+  let uid = localStorage.getItem('uid');
+  if (!uid) {
+    uid = 'xx' + navigator.userAgent.replace(/\D/g, '') + (Math.random()).toFixed(8);
+    localStorage.setItem('uid', uid);
+  }
+  return uid;
+}
+
+
 export function getPlanText(str) {
   var text = document.createTextNode(str);
   var p = document.createElement('p');

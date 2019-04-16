@@ -8,7 +8,7 @@ export function postData(_dialog) {
     'scale': _dialog.elm.scale.value,
     'note': _dialog.elm.note.value,
     'type': _dialog.elm.type.value,
-    'uid': navigator.userAgent.replace(/\D/g, ''),
+    'uid': window.info.uid,
     'timestamp': +new Date(),
     'id': window.info.SpreadsheetId,
   });

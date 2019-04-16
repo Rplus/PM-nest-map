@@ -8,6 +8,7 @@ import * as u from './u/u.js';
 window.info = {
   nowlatlng: {},
   SpreadsheetId: '1N9aa3LZMaFwNbjUSGVD9NloBNE7sM0DY318-DtZHzVo',
+  uid: u.UID(),
 };
 
 document.body.appendChild(ctrls);
