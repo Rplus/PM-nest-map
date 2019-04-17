@@ -134,10 +134,54 @@ html, body, #map {
 
 /* DIALOG */
 
-#close-dialog {
+#dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+#dialog[hidden] {
+  display: none;
+}
+
+.report-form {
+  position: relative;
+  padding: 1rem;
+  box-shadow: 0 0 0 3px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.close-dialog {
   position: absolute;
   top: 0;
   right: 0;
+  width: 1em;
+  height: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.close-dialog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: .8em solid transparent;
+  border-top-color: rgba(0, 0, 0, .05);
+  border-right-color: rgba(0, 0, 0, .05);
+  pointer-events: none;
 }
 
 .submit-box {
@@ -152,6 +196,19 @@ html, body, #map {
 
 .report-content dd + dt {
   padding-top: .5em;
+}
+
+.report-legend::before {
+  content: attr(data-type);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: sans-serif;
+  font-weight: 900;
+  color: transparent;
+  text-shadow: -3px -.3em #eee;
+  font-size: 2rem;
+  text-transform: uppercase;
 }
 
 

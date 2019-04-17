@@ -3,18 +3,15 @@ import { getData } from './get-data.js';
 import { urls } from './u/urls.js';
 import * as u from './u/u.js';
 
-let _dialog = document.createElement('dialog');
+let _dialog = document.createElement('div');
 _dialog.id = 'dialog';
+_dialog.hidden = true;
 window._dialog = _dialog;
 
 _dialog.innerHTML = `
   <form id="report-form" class="report-form" action="${urls.GAS}">
+    <legend class="report-legend"></legend>
     <dl class="report-content">
-      <dd id="rp-data--latlng-box">
-        <input required type="hidden" id="rp-data--lat" value="">
-        <input required type="hidden" id="rp-data--lng" value="">
-      </dd>
-
       <dt>寶可夢編號：</dt>
       <dd id="rp-data--dex-box">
         <input required id="rp-data--dex" type="text" list="rp-data--pm-list">
@@ -37,13 +34,15 @@ _dialog.innerHTML = `
 
       <dd>
         <input required type="hidden" readonly id="rp-data--type" value="">
+        <input required type="hidden" id="rp-data--lat" value="">
+        <input required type="hidden" id="rp-data--lng" value="">
       </dd>
     </dl>
     <div class="submit-box">
       <input id="submit" disabled type="submit" />
     </div>
+    <div class="close-dialog">❌</div>
   </form>
-  <button id="close-dialog">❌</button>
   `;
 
 
@@ -56,8 +55,16 @@ _dialog.elm = {
   type: _dialog.querySelector('#rp-data--type'),
   note: _dialog.querySelector('#rp-data--note'),
   submit: _dialog.querySelector('#submit'),
-  closeBtn: _dialog.querySelector('#close-dialog'),
+  legend: _dialog.querySelector('.report-legend'),
+  closeBtn: _dialog.querySelector('.close-dialog'),
   form: _dialog.querySelector('form'),
+};
+
+_dialog.close = () => {
+  _dialog.hidden = true;
+};
+_dialog.show = () => {
+  _dialog.hidden = false;
 };
 
 _dialog.elm.closeBtn.addEventListener('click', _dialog.close.bind(_dialog))
@@ -93,10 +100,11 @@ _dialog.initReport = (param) => {
   _dialog.elm.scale.value = param.scale || '';
   _dialog.elm.note.value = param.note || '';
   _dialog.elm.type.value = (param.new ? 'new' : 'update');
+  _dialog.elm.legend.dataset.type = (param.new ? 'new' : 'update');
 
   validateForm();
 
-  _dialog.showModal();
+  _dialog.show();
 };
 
 
