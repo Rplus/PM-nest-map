@@ -58,6 +58,18 @@ html, body, #map {
   display: none;
 }
 
+.updatetime {
+  font-size: 10px;
+  line-height: 1;
+  color:  #bbb;
+  display: block;
+}
+
+.updatetime:not(:empty)::after {
+  content: '^';
+  padding-left: .25em;
+}
+
 .popup-content--footer {
   font-size: smaller;
   display: flex;

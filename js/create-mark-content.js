@@ -6,10 +6,15 @@ export default function createMarkerContent(report) {
     `${window.info.nowlatlng.lat},${window.info.nowlatlng.lng}`
   );
 
+  let updateDate = (report.timestamp || '').split('T')[0];
+
   return `
     <div class="popup-content">
       #${report.dex} ${report.name}: ${report.scale}+/hr
-      <div class="note">${getPlanText(report.note || '')}</div>
+      <div class="note">
+        ${getPlanText(report.note || '')}
+        <time class="updatetime" datetime="${report.timestamp}">${updateDate}</time>
+      </div>
       <hr>
       <div class="popup-content--footer">
         <a class="fix-reoprt" href="###"
