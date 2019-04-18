@@ -30,13 +30,22 @@ function getPmNames() {
   return names.map(function(s) { return s[0]; });
 }
 
+function getBlacklist() {
+  var sheet = getSheetFromNamedInRC(3, 1);
+  var lastRow = sheet.getLastRow();
+  var blacklist = sheet.getSheetValues(1, 1, lastRow, 1);
+  return blacklist.map(function(s) { return s[0]; });
+}
+
 function validateData(dataArr) {
+  var blacklist = getBlacklist();
   var data = dataArr.filter(function(rowData) {
     return (
       !!rowData[0] && (rowData[0] < 500) &&
       !!rowData[1] &&
       !!rowData[2] &&
       !!rowData[3] &&
+      (blacklist.indexOf(rowData[6]) === -1) &&
       (rowData[8] !== 'gg') // admin kill word
     );
   });
@@ -69,8 +78,8 @@ function uniArr(arr) {
 }
 
 function tryFn() {
-  LL('gg')
-  LL('電極獸' < 500)
+  var now = new Date();
+  LL(new Date(now - now.getTimezoneOffset() * 60000).toISOString())
 }
 
 function cc() {
