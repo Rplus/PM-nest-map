@@ -1,6 +1,11 @@
 import * as u from './u/u.js';
 
 export function postData(_dialog) {
+
+  if (!u.isNumeric(_dialog.elm.dex.value)) {
+    return Promise.reject(new Error('fail'));
+  }
+
   let data = new URLSearchParams({
     'dex': _dialog.elm.dex.value,
     'lat': _dialog.elm.lat.value,

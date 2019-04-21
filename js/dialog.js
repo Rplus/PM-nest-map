@@ -14,7 +14,7 @@ _dialog.innerHTML = `
     <dl class="report-content">
       <dt>寶可夢編號：</dt>
       <dd id="rp-data--dex-box">
-        <input required id="rp-data--dex" type="text" list="rp-data--pm-list">
+        <input required id="rp-data--dex" type="text" list="rp-data--pm-list" pattern="[0-9.]+">
         <datalist id="rp-data--pm-list"></datalist>
       </dd>
 
@@ -71,6 +71,9 @@ _dialog.elm.closeBtn.addEventListener('click', _dialog.close.bind(_dialog))
 
 
 function validateForm(arg = {}) {
+  if (!_dialog.elm.form.checkValidity()) {
+    alert('請確認表單格式:\n* 編號: 數字格式\n\n目前已輸入的寶可夢編號:\n' + _dialog.elm.dex.value);
+  }
   _dialog.elm.submit.disabled = arg.forceDisabled || !_dialog.elm.form.checkValidity();
 };
 
@@ -83,6 +86,10 @@ function submitFn(e) {
     validateForm();
     _dialog.close();
     getData();
+  })
+  .catch(err => {
+    alert('請確認「寶可夢編號」為數字！');
+    console.log('catch', err);
   });
 };
 

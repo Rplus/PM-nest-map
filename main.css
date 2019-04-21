@@ -223,6 +223,9 @@ html, body, #map {
   text-transform: uppercase;
 }
 
+.report-content input:invalid {
+  outline: 3px solid #f00;
+}
 
 /* CENTER MARK */
 

@@ -8,6 +8,11 @@ export function fetchJSON(url) {
 };
 
 
+export function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+
 export function UID() {
   let uid = localStorage.getItem('uid');
   if (!uid || (uid.indexOf('-') === -1)) {
