@@ -110,6 +110,7 @@ _dialog.initReport = (param) => {
   validateForm();
 
   _dialog.show();
+  _dialog.elm.dex.select();
 };
 
 
