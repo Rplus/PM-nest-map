@@ -10,7 +10,6 @@ window._dialog = _dialog;
 
 _dialog.innerHTML = `
   <form id="report-form" class="report-form" action="${urls.GAS}">
-    <legend class="report-legend"></legend>
     <dl class="report-content">
       <dt>寶可夢編號：</dt>
       <dd id="rp-data--dex-box">
@@ -55,7 +54,6 @@ _dialog.elm = {
   type: _dialog.querySelector('#rp-data--type'),
   note: _dialog.querySelector('#rp-data--note'),
   submit: _dialog.querySelector('#submit'),
-  legend: _dialog.querySelector('.report-legend'),
   closeBtn: _dialog.querySelector('.close-dialog'),
   form: _dialog.querySelector('form'),
 };
@@ -107,7 +105,7 @@ _dialog.initReport = (param) => {
   _dialog.elm.scale.value = param.scale || '';
   _dialog.elm.note.value = param.note || '';
   _dialog.elm.type.value = (param.new ? 'new' : 'update');
-  _dialog.elm.legend.dataset.type = (param.new ? 'new' : 'update');
+  _dialog.elm.form.dataset.type = (param.new ? 'new' : 'update');
 
   validateForm();
 

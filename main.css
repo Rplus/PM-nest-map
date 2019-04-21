@@ -210,7 +210,7 @@ html, body, #map {
   padding-top: .5em;
 }
 
-.report-legend::before {
+.report-form::before {
   content: attr(data-type);
   position: absolute;
   top: 0;
