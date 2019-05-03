@@ -1,6 +1,7 @@
 import map from './map.js';
 import ctrls from './ctrls.js';
 import dialog from './dialog.js';
+import aside from './aside.js';
 import centerMark from './center-mark.js';
 import { urls } from './u/urls.js';
 import * as u from './u/u.js';
@@ -13,4 +14,5 @@ window.info = {
 
 document.body.appendChild(ctrls);
 document.body.appendChild(dialog);
+document.body.appendChild(aside);
 document.body.appendChild(centerMark);
