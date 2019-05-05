@@ -2,13 +2,16 @@
 
 import getPosition from './u/get-position.js';
 import { getData } from './get-data.js';
-
+import { layers, labels } from './map-layers.js';
 
 window.Leaflet = window.L;
-const map = Leaflet.map('map');
+
+const map = Leaflet.map('map', { layers: [layers.Google] });
+
 window._map = map;
 
 let position = getPosition();
+Leaflet.control.layers(layers, labels).addTo(map);
 
 map
   .on('moveend', setPosition)
@@ -17,13 +20,6 @@ map
   .on('locationfound', onLocationFound)
   .on('locationerror', onLocationError)
   .setView(position.latLng, position.zoom)
-
-
-Leaflet.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3']
-  }).addTo(map);
-
 
 
 function setPosition() {
