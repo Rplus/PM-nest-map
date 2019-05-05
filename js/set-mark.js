@@ -1,14 +1,17 @@
 import createMarkerContent from './create-mark-content.js';
 import map from './map.js';
 
+const microseconds_for_week = 60 * 60 * 24 * 7 * 1000;
+
 export function setMark(report) {
   let iconSize = map.getZoom() < 14 ? 32 : 48;
+  let isOld = (new Date() - new Date(report.timestamp)) / microseconds_for_week > 2;
 
   let marker = Leaflet.marker(
     [report.lat, report.lng],
     {
       icon: L.divIcon({
-        className: `poke-icon poke-icon-${report.dex}`,
+        className: `poke-icon poke-icon-${report.dex} ${isOld ? 'is-old' : 'is-new'}`,
         html: `
           <img
             class="pm-img"

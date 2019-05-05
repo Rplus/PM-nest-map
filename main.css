@@ -15,6 +15,11 @@ html, body, #map {
 .poke-icon {
 }
 
+.poke-icon.is-old {
+  filter: contrast(0.2);
+  z-index: 1 !important;
+}
+
 .pm-img {
   width: 100%;
 }
