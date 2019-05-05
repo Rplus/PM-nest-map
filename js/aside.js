@@ -56,7 +56,7 @@ let infoBtn = document.createElement('div');
 infoBtn.className = 'info-btn button';
 
 infoBtn.innerHTML = `
-  <button>i</button>
+  <button>註</button>
   <a href="#info" title="說明"></a>
 `;
 
