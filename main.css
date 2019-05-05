@@ -152,7 +152,7 @@ html, body, #map {
 
 /* DIALOG */
 
-#dialog {
+.dialog {
   position: absolute;
   top: 0;
   left: 0;
@@ -165,19 +165,18 @@ html, body, #map {
   background-color: rgba(0, 0, 0, .3);
 }
 
-#dialog[hidden] {
+.dialog[hidden] {
   display: none;
 }
 
-.report-form {
+.dialog-content {
   position: relative;
+  margin: 1em;
   padding: 1rem;
   box-shadow: 0 0 0 3px;
   background-color: #fff;
-  overflow: hidden;
 }
 
-.close-info,
 .close-dialog {
   position: absolute;
   top: 0;
@@ -219,6 +218,10 @@ html, body, #map {
   padding-top: .5em;
 }
 
+.report-form {
+  overflow: hidden;
+}
+
 .report-form::before {
   content: attr(data-type);
   position: absolute;
@@ -255,14 +258,6 @@ html, body, #map {
 
 .info {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 20000;
-  align-items: center;
-  justify-content: center;
 }
 
 .info:target {
@@ -270,14 +265,7 @@ html, body, #map {
 }
 
 .info-article {
-  position: relative;
-  z-index: 1;
-  width: max-content;
-  height: max-content;
-  padding: 1rem;
-  margin: 1em;
-  box-shadow: 0 0 0 3px;
-  background-color: #fff;
+  z-index: 2;
 }
 
 .info-article li {
@@ -290,7 +278,6 @@ html, body, #map {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .3);
 }
 
 .info-btn {

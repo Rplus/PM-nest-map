@@ -6,10 +6,11 @@ import * as u from './u/u.js';
 let _dialog = document.createElement('div');
 _dialog.id = 'dialog';
 _dialog.hidden = true;
+_dialog.className = 'dialog';
 window._dialog = _dialog;
 
 _dialog.innerHTML = `
-  <form id="report-form" class="report-form" action="${urls.GAS}">
+  <form id="report-form" class="report-form dialog-content" action="${urls.GAS}">
     <dl class="report-content">
       <dt>寶可夢編號：</dt>
       <dd id="rp-data--dex-box">

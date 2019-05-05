@@ -1,12 +1,12 @@
 let aside = document.createElement('aside');
 
 aside.id = 'info';
-aside.className = 'info';
+aside.className = 'info dialog';
 
 aside.innerHTML = `
   <a class="reset-info" href="#"></a>
-  <article class="info-article">
-    <a href="#" class="close-info">❌</a>
+  <article class="info-article dialog-content">
+    <a href="#" class="close-dialog close-info">❌</a>
     <h1>【 寶可夢巢穴地圖 】</h1>
     <ul>
       <li>
