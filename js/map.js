@@ -6,7 +6,11 @@ import { layers, labels } from './map-layers.js';
 
 window.Leaflet = window.L;
 
-const map = Leaflet.map('map', { layers: [layers.Google] });
+let layerName = localStorage.getItem('custom-layer');
+
+const map = Leaflet.map('map', {
+  layers: [ layers[layerName] || layers.Google]
+});
 
 window._map = map;
 
@@ -19,6 +23,7 @@ map
   .on('load', onLoad)
   .on('locationfound', onLocationFound)
   .on('locationerror', onLocationError)
+  .on('baselayerchange', saveLayerName)
   .setView(position.latLng, position.zoom)
 
 
@@ -78,6 +83,10 @@ function onLocationFound(e) {
 function onLocationError(e) {
   console.warn(e.message);
   document.title = `[GG] - ${document.title}`;
+};
+
+function saveLayerName(e) {
+  localStorage.setItem('custom-layer', e.name);
 };
 
 
