@@ -46,6 +46,13 @@ aside.innerHTML = `
         <br>
         © OpenStreetMap & Google map
       </li>
+
+      <li>
+        <input id="lighten-map" type="checkbox" />
+        <label for="lighten-map">
+          淡化地圖？
+        </label>
+      </li>
     </ul>
   </article>
 `;
@@ -59,5 +66,19 @@ infoBtn.innerHTML = `
   <button>註</button>
   <a href="#info" title="說明"></a>
 `;
+
+let lightenMap = aside.querySelector('#lighten-map');
+lightenMap.checked = (localStorage.getItem('lighten-map') === 'true'); // init
+
+let checkToLightenMap = () => {
+  document.body.classList.toggle('lighten-map', lightenMap.checked);
+};
+
+lightenMap.addEventListener('change', () => {
+  localStorage.setItem('lighten-map', lightenMap.checked);
+  checkToLightenMap();
+});
+
+checkToLightenMap();
 
 export { infoBtn }
