@@ -24,6 +24,10 @@ html, body, #map {
   width: 100%;
 }
 
+.pm-img[src="./img/z/0.5.png"] {
+  transform: scale(.5);
+}
+
 .poke-icon::before {
   content: attr(title) '+';
   position: absolute;
