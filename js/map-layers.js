@@ -1,10 +1,15 @@
 window.Leaflet = window.L;
+var twBounds = L.latLngBounds(
+  L.latLng(21.92,118),
+  L.latLng(26,122.5)
+);
 
 // layers source: https://leaflet-extras.github.io/leaflet-providers/preview/
 
 export let layers = {
   'Google': Leaflet.tileLayer(
     'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      bounds: twBounds,
       maxZoom: 20,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       attribution: '&copy; Google Map',
