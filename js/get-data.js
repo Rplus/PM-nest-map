@@ -8,13 +8,14 @@ import { createNamesOption } from './dialog.js';
 export function getData() {
   console.log('re-fetching~~~');
 
+  let checkLatLng = (data) => !(isNaN(data.lat) && isNaN(data.lng));
 
   Promise.all([
     u.fetchJSON(urls.GAS),
     u.fetchJSON(`${urls.GAS}&method=get_pm_name`),
   ])
   .then(d => {
-    let data = d[0].data;
+    let data = d[0].data.filter(checkLatLng);
     let pmNames = d[1];
 
     createNamesOption(pmNames);
