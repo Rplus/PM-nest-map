@@ -121,6 +121,6 @@ let returnOption = (value, label) => `<option value="${value}" label="${label}">
 
 export function createNamesOption(names) {
   _dialog.elm.pmList.innerHTML = names.map(
-    (name, idx) => returnOption(idx + 1, name)
-  ).join('') + returnOption(0.5, '？');
+    (name, idx) => name[1] ? returnOption(idx + 1, name[0]) : null
+  ).join('') + returnOption(0.5, '？', 1);
 };

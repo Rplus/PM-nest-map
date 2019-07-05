@@ -22,7 +22,7 @@ export function getData() {
     window.info.pmNames = pmNames;
 
     data.forEach(d => {
-      d.name = pmNames[d.dex - 1] || '?';
+      d.name = pmNames.map(n => n[0])[d.dex - 1] || '?';
     });
 
     if (window.markers) {
