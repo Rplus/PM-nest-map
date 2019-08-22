@@ -91,6 +91,7 @@ function submitFn(e) {
     _dialog.postCB();
   })
   .catch(err => {
+    _dialog.postCB();
     // alert('請確認「寶可夢編號」為數字！');
     console.log('catch', err);
   });
