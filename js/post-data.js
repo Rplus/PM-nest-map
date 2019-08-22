@@ -18,10 +18,26 @@ export function postData(_dialog) {
     'id': window.info.SpreadsheetId,
   });
 
-  return fetch(_dialog.elm.form.action, {
-    method: 'POST',
-    body: data.toString(),
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  })
-  .then(u.toJSON);
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", _dialog.elm.form.action, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.addEventListener('loadstart', () => {
+      if (_dialog.postTimer) {
+        window.clearTimeout(_dialog.postTimer);
+        _dialog.postTimer = null;
+      }
+      _dialog.postTimer = setTimeout(() => {
+        if (xhr.status === 200) { return; }
+
+        xhr.abort();
+        _dialog.postTimer = null;
+        reject();
+      }, 1000);
+    });
+    xhr.addEventListener('load', resolve);
+    xhr.addEventListener('error', reject);
+    xhr.addEventListener('abort', reject);
+    xhr.send(data.toString());
+  });
 }

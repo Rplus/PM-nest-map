@@ -68,6 +68,12 @@ _dialog.show = () => {
 
 _dialog.elm.closeBtn.addEventListener('click', _dialog.close.bind(_dialog))
 
+_dialog.postCB = () => {
+  _dialog.close();
+  _dialog.elm.submit.disabled = false;
+  getData();
+};
+
 
 function validateForm(arg = {}) {
   if (!_dialog.elm.form.checkValidity()) {
@@ -82,12 +88,10 @@ function submitFn(e) {
 
   postData(_dialog)
   .then(d => {
-    validateForm();
-    _dialog.close();
-    getData();
+    _dialog.postCB();
   })
   .catch(err => {
-    alert('請確認「寶可夢編號」為數字！');
+    // alert('請確認「寶可夢編號」為數字！');
     console.log('catch', err);
   });
 };
