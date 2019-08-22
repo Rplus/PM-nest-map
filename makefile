@@ -13,5 +13,6 @@ browser-sync:
 
 deploy: rollup_js
 	git add js/main.min.js;           \
+	git add js/main.min.js.map;           \
 	git commit -m 'update built file'; \
 	git push;
