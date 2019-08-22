@@ -5,6 +5,7 @@ export default {
   input: 'js/main.src.js',
   output: {
     file: 'js/main.min.js',
+    sourcemap: true,
     format: 'cjs'
   },
   plugins: [
