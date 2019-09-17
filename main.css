@@ -249,6 +249,7 @@ html, body, #map {
   position: fixed;
   top: calc(50% - 5vmin);
   left: calc(50% - 5vmin);
+  z-index: 500;
   width: 10vmin;
   height: 10vmin;
   color: rgba(0, 0, 0, .5);
