@@ -11,7 +11,7 @@ function createIndicator(dom) {
   `);
 }
 
-var scales = [1, 5, 15];
+var scales = [1, 5, 15, 'old'];
 let dom = scales.reduce((all, scale) => {
   all.input.push(`
     <input
@@ -19,10 +19,17 @@ let dom = scales.reduce((all, scale) => {
       class="ckbox-filter"
       id="ckbox_${scale}" checked />`);
   all.label.push(`<label class="filter-label" for="ckbox_${scale}" data-scale="${scale}"></label>`);
-  all.style.push(`
-    #ckbox_${scale}:not(:checked) ~ #map .poke-icon[title="${scale}"] { display: none; }
-    #ckbox_${scale}:not(:checked) ~ .ctrls label[data-scale="${scale}"] { filter: contrast(0%); }
-  `);
+  if (isNaN(scale)) {
+    all.style.push(`
+      #ckbox_${scale}:not(:checked) ~ #map .poke-icon.is-${scale} { display: none; }
+      #ckbox_${scale}:not(:checked) ~ .ctrls label[data-scale="${scale}"] { filter: contrast(0%); }
+    `);
+  } else {
+    all.style.push(`
+      #ckbox_${scale}:not(:checked) ~ #map .poke-icon[title="${scale}"] { display: none; }
+      #ckbox_${scale}:not(:checked) ~ .ctrls label[data-scale="${scale}"] { filter: contrast(0%); }
+    `);
+  }
   return all;
 }, { input: [], label: [], style: [] });
 
